@@ -42,31 +42,21 @@ class Solution{
     int getMiddle(Node *head)
     {
         // Your code here
-        
         if(head == nullptr){
-        return -1; // Empty list
-    }
-    
-    if(head->next == nullptr){
-        return head->data; // Single node in the list
-    }
-    
-    int totalNodes = 0;
-    Node* temp = head;
-    
-    while(temp != nullptr){
-        totalNodes++;
-        temp = temp->next;
-    }
-    
-    int count = 0;
-    temp = head;
-    while(count < totalNodes/2){
-        temp = temp->next;
-        count++; // Increment count to avoid infinite loop
-    }
-    
-    return temp->data;
+            return -1;
+        }
+        
+        if(head-> next == nullptr) return head->data;
+        
+        Node* slow = head;
+        Node* fast = head;
+        
+        while(fast != nullptr && fast->next != nullptr){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        return slow->data;
     }
 };
 
