@@ -40,39 +40,25 @@ int getNthFromLast(struct Node* head, int n);
 class Solution{
 public:
     int getNthFromLast(Node *head, int n)
-{
-    // Your code here
-    if (head == nullptr)
-        return -1; // Empty list
-    
-    Node *temp = head;
-    int totalNodes = 0;
-    
-    while (temp != nullptr) {
-        totalNodes++;
-        temp = temp->next;
+    {
+           // Your code here
+           Node* slow = head;
+           Node* fast = head;
+           
+           while(n--){
+               if(fast == nullptr){
+                   return -1;
+               }
+               fast = fast->next;
+           }
+           
+           while(fast != nullptr){
+               fast = fast->next;
+               slow = slow->next;
+           }
+           
+           return slow->data;
     }
-    
-    // Check if n is greater than the total number of nodes
-    if (n > totalNodes || n <= 0)
-        return -1; // Invalid value of n
-    
-    int target = totalNodes - n;
-    
-    // If n is equal to the total number of nodes, return the data of the head node
-    if (target == 0)
-        return head->data;
-    
-    temp = head;
-    // Traverse to the target node
-    while (target > 0) {
-        temp = temp->next;
-        target--;
-    }
-    
-    return temp->data;
-}
-
 };
 
 
